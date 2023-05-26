@@ -1,6 +1,7 @@
 # `AirBnB Clone`
 
 ## Database Schema Design
+![image](https://github.com/srsy12/AirBnB/assets/107436602/42905377-0535-4c54-ae4f-f127483b3da9)
 
 ![AirBnBSchema](https://github.com/srsy12/AirBnB/assets/107436602/e11a12f3-c2f0-47b1-9573-81712bd22150)
 
