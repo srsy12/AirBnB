@@ -466,7 +466,7 @@ Create and return a new image for a spot specified by id.
 * Require proper authorization: Spot must belong to the current user
 * Request
   * Method: POST
-  * URL: /spots/:spotId/img
+  * URL: /spots/:spotId/image
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1174,7 +1174,7 @@ Update and return an existing booking.
 * Require proper authorization: Booking must belong to the current user
 * Request
   * Method: PUT
-  * URL: /bookings/:bookingsId/edit
+  * URL: /bookings/:bookingId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1268,7 +1268,7 @@ Delete an existing booking.
   Spot must belong to the current user
 * Request
   * Method: DELETE
-  * URL: /bookings/:bookingsId/delete
+  * URL: /bookings/:bookingId
   * Body: none
 
 * Successful Response
@@ -1317,7 +1317,7 @@ Delete an existing image for a Spot.
 * Require proper authorization: Spot must belong to the current user
 * Request
   * Method: DELETE
-  * URL: /spots/img/:imagesId/delete
+  * URL: /spots/:spotId/images/:imageId
   * Body: none
 
 * Successful Response
@@ -1352,7 +1352,7 @@ Delete an existing image for a Review.
 * Require proper authorization: Review must belong to the current user
 * Request
   * Method: DELETE
-  * URL: /reviews/img/:imagesId/delete
+  * URL: /reviews/:reviewId/images/:imageId
   * Body: none
 
 * Successful Response
@@ -1386,7 +1386,7 @@ Return spots filtered by query parameters.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /spots?
+  * URL: /spots?page=?size?
   * Query Parameters
     * page: integer, minimum: 1, maximum: 10, default: 1
     * size: integer, minimum: 1, maximum: 20, default: 20
