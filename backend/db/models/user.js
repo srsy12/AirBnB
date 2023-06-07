@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
 
   User.init(
     {
-      userName: {
+      username: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
