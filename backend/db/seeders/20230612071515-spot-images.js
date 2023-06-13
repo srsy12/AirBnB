@@ -24,6 +24,11 @@ module.exports = {
         spotId: 3,
         url: 'Joe/Mama',
         preview: false
+      },
+      {
+        spotId: 1,
+        url: 'Joe/bitch',
+        preview: true
       }
     ], {});
   },
