@@ -48,7 +48,53 @@ router.get('/', async (req, res) => {
     res.json(results);
 });
 
+router.get('/current', requireAuth, async (req, res) => {
+    let user = req.user;
+    let results = {};
+    const spots = await Spot.findAll({
+        where: {
+            ownerId: user.id
+        },
+        include: [
+            {
+                model: Review,
+                attributes: []
+            }
+        ],
+        attributes: [
+            'id',
+            'ownerId',
+            'address',
+            'city',
+            'state',
+            'country',
+            'lat',
+            'lng',
+            'name',
+            'description',
+            'price',
+            'createdAt',
+            'updatedAt',
+            [sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']
+        ],
+        group: ['Spot.Id']
+    });
 
+    for (const spot of spots) {
+        const previewImage = await SpotImage.findOne({
+            attributes: ['url'],
+            where: { spotId: spot.id, preview: true },
+        });
+        if (previewImage) {
+            spot.dataValues.previewImage = previewImage.dataValues.url;
+        }
+    };
+
+    results.spots = spots;
+
+    return res.status(200).json(results)
+
+});
 router.post('/', requireAuth, async (req, res) => {
     const ownerId = req.user.id
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
