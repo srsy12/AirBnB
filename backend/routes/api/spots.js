@@ -122,7 +122,7 @@ router.get('/current', requireAuth, async (req, res) => {
             "updatedAt",
             [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
         ],
-        group: ["Spot.Id"]
+        group: ['Spot.Id']
     });
 
     for (const spot of spots) {
