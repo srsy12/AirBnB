@@ -52,6 +52,7 @@ const validateSpot = [
 router.get('/', async (req, res) => {
     let results = {};
     const spots = await Spot.findAll({
+        order: [["id"]],
         include: [
             {
                 model: Review,
@@ -100,6 +101,7 @@ router.get('/current', requireAuth, async (req, res) => {
         where: {
             ownerId: user.id
         },
+        order: [["id"]],
         include: [
             {
                 model: Review,
@@ -122,7 +124,7 @@ router.get('/current', requireAuth, async (req, res) => {
             "updatedAt",
             [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
         ],
-        group: ["Spot.Id"]
+        group: ["Spot.id"]
     });
 
     for (const spot of spots) {
@@ -201,7 +203,7 @@ router.get('/:spotId', async (req, res) => {
             [sequelize.fn("COUNT", sequelize.col("Reviews.id")), "numReviews"],
             [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"],
         ],
-        group: ["SpotImages.id"],
+        group: ["SpotImages.id", "Spot.id"]
     });
 
     if (spot) {
