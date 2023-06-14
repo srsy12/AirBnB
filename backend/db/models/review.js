@@ -40,11 +40,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     review: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
     },
     stars: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
   }, {
     sequelize,

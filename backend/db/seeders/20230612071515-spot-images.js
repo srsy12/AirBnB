@@ -28,7 +28,7 @@ module.exports = {
       {
         spotId: 1,
         url: 'Joe/bitch',
-        preview: true
+        preview: false
       }
     ], {});
   },
