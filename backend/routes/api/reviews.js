@@ -80,7 +80,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
                 }
                 return res.json(response)
             } else return res.status(403).json({ message: "Maximum number of images for this resource was reached" })
-        } else return res.status(403).json("Forbiden")
+        } else return res.status(403).json({ message: "Forbidden" })
     } else return res.status(404).json({ message: "Review couldn't be found" })
 });
 
@@ -118,5 +118,7 @@ router.delete('/:reviewsId', requireAuth, async (req, res) => {
             return res.status(200).json({ message: "Successfully deleted" })
         } else return res.status(403).json({ message: "Forbidden" })
     } else return res.status(404).json({ message: "Review couldn't be found" })
-})
+});
+
+
 module.exports = router;
