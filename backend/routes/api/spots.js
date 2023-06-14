@@ -59,20 +59,20 @@ router.get('/', async (req, res) => {
             }
         ],
         attributes: [
-            'id',
-            'ownerId',
-            'address',
-            'city',
-            'state',
-            'country',
-            'lat',
-            'lng',
-            'name',
-            'description',
-            'price',
-            'createdAt',
-            'updatedAt',
-            [sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']
+            "id",
+            "ownerId",
+            "address",
+            "city",
+            "state",
+            "country",
+            "lat",
+            "lng",
+            "name",
+            "description",
+            "price",
+            "createdAt",
+            "updatedAt",
+            [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
         ],
         group: ["Spot.id"]
     });
@@ -107,20 +107,20 @@ router.get('/current', requireAuth, async (req, res) => {
             }
         ],
         attributes: [
-            'id',
-            'ownerId',
-            'address',
-            'city',
-            'state',
-            'country',
-            'lat',
-            'lng',
-            'name',
-            'description',
-            'price',
-            'createdAt',
-            'updatedAt',
-            [sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']
+            "id",
+            "ownerId",
+            "address",
+            "city",
+            "state",
+            "country",
+            "lat",
+            "lng",
+            "name",
+            "description",
+            "price",
+            "createdAt",
+            "updatedAt",
+            [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
         ],
         group: ["Spot.Id"]
     });
