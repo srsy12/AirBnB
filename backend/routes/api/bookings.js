@@ -38,6 +38,7 @@ router.get('/current', requireAuth, async (req, res) => {
     res.status(200).json(results);
 });
 
+//Edit a Booking
 router.put('/:bookingId', requireAuth, async (req, res) => {
     let userId = req.user.id;
     let bookingId = req.params.bookingId
@@ -98,15 +99,15 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
     let bookingId = req.params.bookingId;
 
     const currentBooking = await Booking.findByPk(bookingId);
-    const spot = await Spot.findByPk(parseInt(currentBooking.spotId));
 
 
-    let today = new Date();
-    let startDate = new Date(currentBooking.startDate);
 
     if (!currentBooking) {
         return res.status(404).json({ message: "Booking couldn't be found!" })
     };
+    let today = new Date();
+    let startDate = new Date(currentBooking.startDate);
+    const spot = await Spot.findByPk(parseInt(currentBooking.spotId));
     if (spot.ownerId === userId) {
         await currentBooking.destroy();
         return res.status(200).json({ message: "Successfully Deleted!" });
