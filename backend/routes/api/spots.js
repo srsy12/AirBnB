@@ -156,7 +156,8 @@ router.get('/', validateQueries, async (req, res) => {
                 }
             ],
             attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "description", "price", "createdAt", "updatedAt",
-                [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
+                [sequelize.fn("ROUND", sequelize.fn("AVG", sequelize.col("stars")), 1),
+                    "avgRating",]
             ],
             group: ["Spot.id"],
         })
@@ -191,7 +192,8 @@ router.get('/current', requireAuth, async (req, res) => {
             }
         ],
         attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "description", "price", "createdAt", "updatedAt",
-            [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
+            [sequelize.fn("ROUND", sequelize.fn("AVG", sequelize.col("stars")), 1),
+                "avgRating",]
         ],
         group: ["Spot.id"]
     });
@@ -257,7 +259,8 @@ router.get('/:spotId', async (req, res) => {
         ],
         attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "description", "price", "createdAt", "updatedAt",
             [sequelize.fn("COUNT", sequelize.col("Reviews.id")), "numReviews"],
-            [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"],
+            [sequelize.fn("ROUND", sequelize.fn("AVG", sequelize.col("stars")), 1),
+                "avgRating",],
         ],
         group: ["SpotImages.id", "Spot.id", "Owner.id"]
     });
