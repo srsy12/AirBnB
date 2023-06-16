@@ -81,10 +81,6 @@ module.exports = (sequelize, DataTypes) => {
     price: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    avgRating: {
-      type: DataTypes.INTEGER,
-      allowNull: true
     }
   }, {
     sequelize,
