@@ -127,16 +127,16 @@ router.get('/', validateQueries, async (req, res) => {
     const spots = await Spot.findAll({
         where,
         order: [["id"]],
-        include: [
-            {
-                model: Review,
-                attributes: []
-            }
-        ],
-        attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "description", "price", "createdAt", "updatedAt",
-            [sequelize.literal("(SELECT AVG(stars) FROM Reviews WHERE Reviews.spotId = Spot.id)"), "avgRating",]
-        ],
-        group: ["Spot.id"],
+        // include: [
+        //     {
+        //         model: Review,
+        //         attributes: []
+        //     }
+        // ],
+        // attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "description", "price", "createdAt", "updatedAt",
+        //     [sequelize.literal("(SELECT AVG(stars) FROM Reviews WHERE Reviews.spotId = Spot.id)"), "avgRating",]
+        // ],
+        // group: ["Spot.id"],
         ...pagination
     });
 
@@ -148,13 +148,32 @@ router.get('/', validateQueries, async (req, res) => {
         if (previewImage) {
             spot.dataValues.previewImage = previewImage.dataValues.url;
         }
+        const spotavgRating = await Spot.findByPk(spot.id, {
+            include: [
+                {
+                    model: Review,
+                    attributes: []
+                }
+            ],
+            attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "description", "price", "createdAt", "updatedAt",
+                [sequelize.fn("ROUND", sequelize.fn("AVG", sequelize.col("stars")), 1),
+                    "avgRating",]
+            ],
+            group: ["Spot.id"],
+        })
+
+        const avgRating = spotavgRating.dataValues.avgRating
+
+        if (spotavgRating) spot.dataValues.avgRating = avgRating
     };
+
 
     results.Spots = spots;
     results.page = page;
     results.size = size;
     res.status(200);
     res.json(results);
+
 });
 
 //Get all Spots owned by the current User
@@ -173,7 +192,8 @@ router.get('/current', requireAuth, async (req, res) => {
             }
         ],
         attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "description", "price", "createdAt", "updatedAt",
-            [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
+            [sequelize.fn("ROUND", sequelize.fn("AVG", sequelize.col("stars")), 1),
+                "avgRating",]
         ],
         group: ["Spot.id"]
     });
@@ -239,7 +259,8 @@ router.get('/:spotId', async (req, res) => {
         ],
         attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "description", "price", "createdAt", "updatedAt",
             [sequelize.fn("COUNT", sequelize.col("Reviews.id")), "numReviews"],
-            [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"],
+            [sequelize.fn("ROUND", sequelize.fn("AVG", sequelize.col("stars")), 1),
+                "avgRating",],
         ],
         group: ["SpotImages.id", "Spot.id", "Owner.id"]
     });
