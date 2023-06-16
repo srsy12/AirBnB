@@ -220,18 +220,9 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const spot = await Spot.create({ ownerId, address, city, state, country, lat, lng, name, description, price });
 
-    let result = {
-        address: spot.address,
-        city: spot.city,
-        state: spot.state,
-        country: spot.country,
-        lat: spot.lat,
-        lng: spot.lng,
-        name: spot.name,
-        description: spot.description,
-        price: spot.price
-    }
-    return res.status(201).json(result);
+    await spot.save();
+
+    return res.status(201).json(save);
 });
 
 //Get all details of a spot from an id
@@ -320,21 +311,7 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
 
             await updatedSpot.save();
 
-            let result = {
-                address: updatedSpot.address,
-                city: updatedSpot.city,
-                state: updatedSpot.state,
-                country: updatedSpot.country,
-                lat: updatedSpot.lat,
-                lng: updatedSpot.lng,
-                name: updatedSpot.name,
-                description: updatedSpot.description,
-                price: updatedSpot.price,
-                createdAt: updatedSpot.createdAt,
-                updatedAt: updatedSpot.updatedAt
-            };
-
-            return res.status(200).json(result);
+            return res.status(200).json(updatedSpot);
         } else return res.status(403).json({ message: "Forbidden!" })
     } else return res.status(404).json({ message: "Spot couldn't be found!" })
 });
