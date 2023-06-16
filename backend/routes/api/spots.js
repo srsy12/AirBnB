@@ -220,9 +220,8 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const spot = await Spot.create({ ownerId, address, city, state, country, lat, lng, name, description, price });
 
-    await spot.save();
 
-    return res.status(201).json(save);
+    return res.status(201).json(spot);
 });
 
 //Get all details of a spot from an id
