@@ -127,16 +127,16 @@ router.get('/', validateQueries, async (req, res) => {
     const spots = await Spot.findAll({
         where,
         order: [["id"]],
-        include: [
-            {
-                model: Review,
-                attributes: []
-            }
-        ],
-        attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "description", "price", "createdAt", "updatedAt",
-            [sequelize.literal("(SELECT AVG(stars) FROM Reviews WHERE Reviews.spotId = Spot.id)"), "avgRating",]
-        ],
-        group: ["Spot.id"],
+        // include: [
+        //     {
+        //         model: Review,
+        //         attributes: []
+        //     }
+        // ],
+        // attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "description", "price", "createdAt", "updatedAt",
+        //     [sequelize.literal("(SELECT AVG(stars) FROM Reviews WHERE Reviews.spotId = Spot.id)"), "avgRating",]
+        // ],
+        // group: ["Spot.id"],
         ...pagination
     });
 
@@ -148,13 +148,31 @@ router.get('/', validateQueries, async (req, res) => {
         if (previewImage) {
             spot.dataValues.previewImage = previewImage.dataValues.url;
         }
+        const spotavgRating = await Spot.findByPk(spot.id, {
+            include: [
+                {
+                    model: Review,
+                    attributes: []
+                }
+            ],
+            attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "description", "price", "createdAt", "updatedAt",
+                [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
+            ],
+            group: ["Spot.id"],
+        })
+
+        const avgRating = spotavgRating.dataValues.avgRating
+
+        if (spotavgRating) spot.dataValues.avgRating = avgRating
     };
+
 
     results.Spots = spots;
     results.page = page;
     results.size = size;
     res.status(200);
     res.json(results);
+
 });
 
 //Get all Spots owned by the current User
