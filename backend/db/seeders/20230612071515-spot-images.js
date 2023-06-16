@@ -23,7 +23,7 @@ module.exports = {
       {
         spotId: 3,
         url: 'Joe/Mama',
-        preview: false
+        preview: true
       },
       {
         spotId: 1,

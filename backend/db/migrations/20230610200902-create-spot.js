@@ -57,10 +57,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      avgRating: {
-        type: Sequelize.INTEGER,
-        allowNull: true
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
