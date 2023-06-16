@@ -4,6 +4,7 @@ const sequelize = require('sequelize');
 const { requireAuth } = require('../../utils/auth');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { Op } = require('sequelize');
 
 const { User, Spot, Review, SpotImage, ReviewImage, Booking } = require('../../db/models');
 
@@ -48,10 +49,83 @@ const validateSpot = [
     handleValidationErrors
 ];
 
+const validateQueries = [
+    check('page')
+        .optional(true)
+        .isFloat({ min: 1 })
+        .withMessage("Page must be greater than or equal to 1"),
+    check('size')
+        .optional(true)
+        .isFloat({ min: 1 })
+        .withMessage("Size must be greater than or equal to 1"),
+    check('maxLat')
+        .optional(true)
+        .isFloat({ max: 90 })
+        .withMessage("Maximum latitude is invalid"),
+    check('minLat')
+        .optional(true)
+        .isFloat({ min: -90 })
+        .withMessage("Minimum latitude is invalid"),
+    check('minLng')
+        .optional(true)
+        .isFloat({ min: -180 })
+        .withMessage("Minimum longitude is invalid"),
+    check('maxLng')
+        .optional(true)
+        .isFloat({ max: 180 })
+        .withMessage("Maximum longitude is invalid"),
+    check('minPrice')
+        .optional(true)
+        .isFloat({ min: 0 })
+        .withMessage("Minimum price must be greater than or equal to 0"),
+    check('maxPrice')
+        .optional(true)
+        .isFloat({ min: 0 })
+        .withMessage("Maximum price must be greater than or equal to 0"),
+    handleValidationErrors
+];
+
+
 //Get All Spots
-router.get('/', async (req, res) => {
+router.get('/', validateQueries, async (req, res) => {
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+
+    if (!page) page = 1;
+    if (!size) size = 20;
+    if (page > 10) page = 1;
+    if (size > 20) size = 20;
+    page = parseInt(page);
+    size = parseInt(size);
+
+    let pagination = {
+        limit: size,
+        offset: size * (page - 1)
+    }
+
+    const where = {};
+
+    if (minPrice) {
+        where.price = { [Op.gte]: minPrice }
+    };
+    if (maxPrice) {
+        where.price = { ...where.price, [Op.lte]: maxPrice }
+    };
+    if (minLat) {
+        where.lat = { [Op.gte]: minLat }
+    };
+    if (maxLat) {
+        where.lat = { ...where.lat, [Op.lte]: maxLat }
+    };
+    if (minLng) {
+        where.lng = { [Op.gte]: minLng }
+    };
+    if (maxLng) {
+        where.lng = { ...where.lng, [Op.lte]: maxLng }
+    };
+
     let results = {};
     const spots = await Spot.findAll({
+        where,
         order: [["id"]],
         include: [
             {
@@ -59,23 +133,11 @@ router.get('/', async (req, res) => {
                 attributes: []
             }
         ],
-        attributes: [
-            "id",
-            "ownerId",
-            "address",
-            "city",
-            "state",
-            "country",
-            "lat",
-            "lng",
-            "name",
-            "description",
-            "price",
-            "createdAt",
-            "updatedAt",
-            [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
+        attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "description", "price", "createdAt", "updatedAt",
+            [sequelize.literal("(SELECT AVG(stars) FROM Reviews WHERE Reviews.spotId = Spot.id)"), "avgRating",]
         ],
-        group: ["Spot.id"]
+        group: ["Spot.id"],
+        ...pagination
     });
 
     for (const spot of spots) {
@@ -88,7 +150,9 @@ router.get('/', async (req, res) => {
         }
     };
 
-    results.spots = spots;
+    results.Spots = spots;
+    results.page = page;
+    results.size = size;
     res.status(200);
     res.json(results);
 });
@@ -108,20 +172,7 @@ router.get('/current', requireAuth, async (req, res) => {
                 attributes: []
             }
         ],
-        attributes: [
-            "id",
-            "ownerId",
-            "address",
-            "city",
-            "state",
-            "country",
-            "lat",
-            "lng",
-            "name",
-            "description",
-            "price",
-            "createdAt",
-            "updatedAt",
+        attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "description", "price", "createdAt", "updatedAt",
             [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
         ],
         group: ["Spot.id"]
@@ -186,20 +237,7 @@ router.get('/:spotId', async (req, res) => {
                 attributes: ["id", "firstName", "lastName"],
             },
         ],
-        attributes: [
-            "id",
-            "ownerId",
-            "address",
-            "city",
-            "state",
-            "country",
-            "lat",
-            "lng",
-            "name",
-            "description",
-            "price",
-            "createdAt",
-            "updatedAt",
+        attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "description", "price", "createdAt", "updatedAt",
             [sequelize.fn("COUNT", sequelize.col("Reviews.id")), "numReviews"],
             [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"],
         ],
