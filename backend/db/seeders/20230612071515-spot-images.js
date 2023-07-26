@@ -12,17 +12,17 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         spotId: 1,
-        url: 'fiftynineteen/inFrench',
+        url: 'https://images.jacobinmag.com/wp-content/uploads/2021/05/02160332/ccsfmissioncampus.jpg',
         preview: true
       },
       {
         spotId: 2,
-        url: 'towel/inKorean',
+        url: 'https://www.wienerschnitzel.com/wp-content/uploads/2014/10/Wienerschnitzel-Store-Picture-3.jpg',
         preview: true
       },
       {
         spotId: 3,
-        url: 'Joe/Mama',
+        url: 'https://cdn.britannica.com/64/152364-050-B53A8C81/Spaceship-Earth-Epcot-Walt-Disney-World-Resort.jpg',
         preview: true
       },
       {
