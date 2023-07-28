@@ -348,6 +348,7 @@ router.get("/:spotId/reviews", async (req, res) => {
                 attributes: ["id", "url"],
             },
         ],
+        order: [["createdAt", "DESC"]]
     });
 
     if (reviews.length) return res.status(200).json(reviews);

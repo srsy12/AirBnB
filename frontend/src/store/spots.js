@@ -27,7 +27,7 @@ export const getAllSpots = () => async dispatch => {
         dispatch(getAll(list.Spots))
         return response;
     }
-}
+};
 
 export const getSpotId = (id) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${id}`);
@@ -50,7 +50,7 @@ export const createSpot = (spotData) => async dispatch => {
         const newSpot = await response.json();
         dispatch(getSpot(newSpot));
         return newSpot;
-    } 
+    }
 };
 
 export const createSpotImage = (id, imagePayload) => async (dispatch) => {
@@ -62,7 +62,7 @@ export const createSpotImage = (id, imagePayload) => async (dispatch) => {
     const spotImage = await res.json();
     dispatch(createImage(imagePayload))
     return spotImage
-}
+};
 
 
 const spotReducer = (state = {}, action) => {
@@ -79,6 +79,6 @@ const spotReducer = (state = {}, action) => {
         default:
             return state;
     }
-}
+};
 
 export default spotReducer;

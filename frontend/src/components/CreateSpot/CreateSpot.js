@@ -35,22 +35,25 @@ const CreateSpot = () => {
         if (!name.length) errors.name = "Name is required";
         if (description.length < 30) errors.description = "Description needs a minimum of 30 characters";
         if (!price) errors.price = "Price is required";
-        if (!url.length) errors.url = "Preview Image is required";
-        if (!(url.endsWith(".jpg") || url.endsWith(".png") || url.endsWith(".jpeg"))) errors.url = "Image url must end in .png .jpeg or .jpg";
-        if (url2) {
+        if (!url.length) {
+            errors.url = "Preview Image is required";
+        } else {
+            if (!(url.endsWith(".jpg") || url.endsWith(".png") || url.endsWith(".jpeg"))) errors.url = "Image url must end in .png .jpeg or .jpg";
+        }
+        if (url2.length) {
             if (!(url2.endsWith(".jpg") || url2.endsWith(".png") || url2.endsWith(".jpeg"))) errors.url2 = "Image url must end in .png .jpeg or .jpg";
         };
-        if (url3) {
+        if (url3.length) {
             if (!(url3.endsWith(".jpg") || url3.endsWith(".png") || url3.endsWith(".jpeg"))) errors.url3 = "Image url must end in .png .jpeg or .jpg";
         };
-        if (url4) {
+        if (url4.length) {
             if (!(url4.endsWith(".jpg") || url4.endsWith(".png") || url4.endsWith(".jpeg"))) errors.url4 = "Image url must end in .png .jpeg or .jpg";
         };
-        if (url5) {
+        if (url5.length) {
             if (!(url5.endsWith(".jpg") || url5.endsWith(".png") || url5.endsWith(".jpeg"))) errors.url5 = "Image url must end in .png .jpeg or .jpg";
         };
         setValidationErrors(errors);
-    }, [address, city, state, country, name, description, price, url, url4]);
+    }, [address, city, state, country, name, description, price, url, url2, url3, url4, url5]);
 
 
     const updateAddress = (e) => setAddress(e.target.value);

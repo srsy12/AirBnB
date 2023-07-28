@@ -1,0 +1,61 @@
+/* Navigation.css */
+
+/* Style for the navigation container */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the logo item */
+.nav-logo {
+    font-size: 20px;
+    font-weight: bold;
+    border: none
+}
+
+/* Style for the navigation links */
+.nav-link {
+    color: #222;
+    text-decoration: none;
+    margin-right: 20px;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #ff385c;
+}
+
+/* Style for the session links (ProfileButton and "Create A New Spot" link) */
+.nav-session-links {
+    display: flex;
+    align-items: center;
+}
+
+/* Style for the user icon in the ProfileButton */
+.nav-session-links button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #333;
+    margin-right: 10px;
+}
+
+/* Style for the "Create A New Spot" link */
+.nav-session-links .nav-link {
+    font-weight: bold;
+}
+
+/* Style for the active navigation link (when it's active) */
+.nav-link.active {
+    color: #ff385c;
+}
+
+.homeLogo-png {
+    width: 50px;
+    height: 50px;
+}

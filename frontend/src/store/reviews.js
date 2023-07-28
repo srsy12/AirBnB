@@ -1,19 +1,47 @@
 import { csrfFetch } from "./csrf";
 
 const LOAD_SPOT_REVIEWS = 'reviews/LOAD_SPOT_REVIEWS';
+const CREATE_REVIEW = 'reviews/CREATE_REVIEW'
 
 const loadSpotReviews = reviews => ({
     type: LOAD_SPOT_REVIEWS,
     reviews
 });
 
+const makeReview = (reviewPayload) => ({
+    type: CREATE_REVIEW,
+    reviewPayload
+});
+
+
+
 export const getReviewsById = (id) => async dispatch => {
-    const response = await csrfFetch(`/api/spots/${id}/reviews`);
+    try {
+        const response = await csrfFetch(`/api/spots/${id}/reviews`);
+
+        if (response.ok) {
+            const reviews = await response.json();
+            console.log(reviews)
+            dispatch(loadSpotReviews(reviews))
+            return reviews;
+        }
+    }
+    catch (err) {
+        console.error(err)
+    }
+};
+
+export const createReview = (id, reviewData) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${id}/reviews`, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(reviewData),
+    })
 
     if (response.ok) {
-        const reviews = await response.json();
-        dispatch(loadSpotReviews(reviews))
-        return reviews;
+        const newReview = await response.json();
+        dispatch(makeReview(newReview));
+        return newReview;
     }
 };
 
