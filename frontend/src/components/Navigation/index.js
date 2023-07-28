@@ -20,6 +20,7 @@ function Navigation({ isLoaded }) {
             <li>
                 <ProfileButton user={sessionUser} />
                 <button onClick={logout}>Log Out</button>
+                <NavLink to="/spots">Create A New Spot</NavLink>
             </li>
         );
     } else {

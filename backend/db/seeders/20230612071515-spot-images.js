@@ -27,7 +27,7 @@ module.exports = {
       },
       {
         spotId: 1,
-        url: 'Joe/bitch',
+        url: 'https://www.ucsf.edu/sites/default/files/styles/full_bleed_half__image/public/2021-01/Parnassus-aerial-with-downtown-SF.jpg',
         preview: false
       }
     ], {});

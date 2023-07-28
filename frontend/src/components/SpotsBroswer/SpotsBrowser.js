@@ -7,12 +7,11 @@ import "./SpotsBrowser.css"
 import SpotDetails from '../SpotDetails/SpotDetails';
 
 const SpotsBrowser = () => {
-    const { spotId } = useParams();
     const dispatch = useDispatch();
-    const spotsObject = useSelector(state => state.spotState.spots);
-    // console.log(spotsObject)
-    const spots = Object.values(spotsObject)
-    console.log(spots)
+    let spotsObject = useSelector(state => state.spotState);
+
+    spotsObject = Object.entries(spotsObject).filter(([key]) => key !== "detail");
+
 
     useEffect(() => {
         dispatch(getAllSpots());
@@ -22,15 +21,15 @@ const SpotsBrowser = () => {
         <div>
             <h1>Spots List</h1>
             <div>
-                {spots[0]?.map((spot) => (
-                    <div key={spot.id}><NavLink to={`/spots/${spot.id}`}>
+                {spotsObject?.map(([key, spot]) => (
+                    <div key={key}><NavLink to={`/spots/${spot.id}`}>
                         <div>
                             <img src={spot.previewImage} className='spotImages' />
                             <h1>{spot.name}</h1>
                             <h3>{spot.city}</h3>
                             <h3>{spot.state}</h3>
                             <h4> ${spot.price}/night</h4>
-                            <h4>{spot.avgRating}<i class="fa-solid fa-star"></i></h4>
+                            <h4>{spot.avgRating ? spot.avgRating : 'NEW'}<i class="fa-solid fa-star"></i></h4>
                         </div>
                     </NavLink>
                     </div>
