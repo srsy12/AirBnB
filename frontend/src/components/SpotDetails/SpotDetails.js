@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
 import { getSpotId } from '../../store/spots';
 import './SpotDetails.css'; // Import the SpotDetails.css file for styling
+import PostReview from '../PostReview/PostReview';
 
 const SpotDetails = () => {
     const { spotId } = useParams();
@@ -15,7 +16,7 @@ const SpotDetails = () => {
 
     useEffect(() => {
         dispatch(getSpotId(spotId));
-        if (!reviews) dispatch(getReviewsById(spotId))
+        dispatch(getReviewsById(spotId))
     }, [dispatch, spotId]);
 
     return (

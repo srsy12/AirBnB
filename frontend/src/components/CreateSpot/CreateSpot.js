@@ -161,7 +161,7 @@ const CreateSpot = () => {
             <form onSubmit={handleSubmit}>
                 <div>
                     <input
-                        type="country"
+                        type="string"
                         placeholder="country"
                         value={country}
                         onChange={updateCountry} />
