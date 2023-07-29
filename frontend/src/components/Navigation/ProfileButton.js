@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
+import './ProfileButton.css';
 
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
@@ -31,22 +32,27 @@ function ProfileButton({ user }) {
         dispatch(sessionActions.logout());
     };
 
-    const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+    const ulClassName = `profile-dropdown ${showMenu ? "" : "hidden"}`; // Updated class name here
 
     return (
-        <>
-            <button onClick={openMenu}>
-                <i className="fas fa-user-circle" />
-            </button>
-            <ul className={ulClassName} ref={ulRef}>
-                <li>{user.username}</li>
-                <li>{user.firstName} {user.lastName}</li>
-                <li>{user.email}</li>
-                <li>
-                    <button onClick={logout}>Log Out</button>
-                </li>
-            </ul>
-        </>
+        <div className="header">
+            <div className="header-right">
+                {/* ProfileButton */}
+                <button onClick={openMenu}>
+                    <i className="fas fa-user-circle" />
+                </button>
+                {showMenu && ( // Conditionally render the logout button inside the dropdown
+                    <ul className={ulClassName} ref={ulRef}>
+                        <li>{user.username}</li>
+                        <li>{user.firstName} {user.lastName}</li>
+                        <li>{user.email}</li>
+                        <li>
+                            <button onClick={logout}>Log Out</button>
+                        </li>
+                    </ul>
+                )}
+            </div>
+        </div>
     );
 }
 
