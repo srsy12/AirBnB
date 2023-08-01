@@ -22,7 +22,7 @@ const getSpot = (spot) => ({
 const createImage = (imagePayload) => ({
     type: CREATE_URL,
     imagePayload
-})
+});
 
 export const getAllSpots = () => async dispatch => {
     const response = await csrfFetch(`/api/spots`);
@@ -89,6 +89,16 @@ export const createSpotImage = (id, imagePayload) => async (dispatch) => {
     const spotImage = await res.json();
     dispatch(createImage(imagePayload))
     return spotImage
+};
+
+export const deleteSpotId = (id) => async (dispatch) => {
+    const result = await csrfFetch(`/api/spots/${id}`, {
+        method: "DELETE",
+    })
+
+    if (result.ok) {
+        return true;
+    }
 };
 
 
