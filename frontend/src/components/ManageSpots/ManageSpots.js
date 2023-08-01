@@ -16,7 +16,7 @@ const ManageSpots = () => {
         dispatch(getSpotsById());
     }, [dispatch]);
 
-    console.log(spotsObject)
+
 
     if (!spotsObject.length) {
         return (

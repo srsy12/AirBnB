@@ -4,6 +4,7 @@ const GET_ALL = 'spots/GET_ALL';
 const SPOT_DETAIL = 'spots/SPOT_DETAIL';
 const CREATE_URL = 'spots/CREATE_URL'
 const GET_ID = 'spots/GET_ID'
+const DELETE = 'spots/DELETE'
 
 const getAll = (spots) => ({
     type: GET_ALL,
@@ -22,6 +23,10 @@ const getSpot = (spot) => ({
 const createImage = (imagePayload) => ({
     type: CREATE_URL,
     imagePayload
+});
+
+const deleteThing = () => ({
+    type: DELETE
 });
 
 export const getAllSpots = () => async dispatch => {
@@ -97,7 +102,9 @@ export const deleteSpotId = (id) => async (dispatch) => {
     })
 
     if (result.ok) {
-        return true;
+        const deleted = await result.json();
+        dispatch(deleteThing())
+        return deleted;
     }
 };
 
@@ -118,6 +125,9 @@ const spotReducer = (state = {}, action) => {
             action.spots.forEach((spot) => {
                 newState[spot.id] = spot
             });
+            return newState
+        case DELETE:
+            newState = {};
             return newState
         default:
             return state;
