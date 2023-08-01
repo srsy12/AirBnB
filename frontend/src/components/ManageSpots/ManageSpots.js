@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
@@ -36,8 +36,8 @@ const ManageSpots = () => {
                                 </h4>
                             </div>
                         </NavLink>
-                        <NavLink to="/spots/:spotId/delete">Delete</NavLink>
-                        <NavLink to="/spots/:spotId/update">Update</NavLink>
+                        <NavLink to={`/spots/${spot.id}/delete`}>Delete</NavLink>
+                        <NavLink to={`/spots/${spot.id}/update`}>Update</NavLink>
                     </div>
                 ))}
             </div>
