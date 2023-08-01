@@ -3,9 +3,14 @@ import { csrfFetch } from "./csrf";
 const GET_ALL = 'spots/GET_ALL';
 const SPOT_DETAIL = 'spots/SPOT_DETAIL';
 const CREATE_URL = 'spots/CREATE_URL'
+const GET_ID = 'spots/GET_ID'
 
 const getAll = (spots) => ({
     type: GET_ALL,
+    spots
+});
+const getId = (spots) => ({
+    type: GET_ID,
     spots
 });
 
@@ -25,6 +30,15 @@ export const getAllSpots = () => async dispatch => {
     if (response.ok) {
         const list = await response.json();
         dispatch(getAll(list.Spots))
+        return response;
+    }
+};
+export const getSpotsById = () => async dispatch => {
+    const response = await csrfFetch(`/api/spots/current`);
+
+    if (response.ok) {
+        const list = await response.json();
+        dispatch(getId(list.spots))
         return response;
     }
 };
@@ -66,7 +80,7 @@ export const createSpotImage = (id, imagePayload) => async (dispatch) => {
 
 
 const spotReducer = (state = {}, action) => {
-    const newState = { ...state }
+    let newState = { ...state }
     switch (action.type) {
         case GET_ALL:
             action.spots.forEach((spot) => {
@@ -76,6 +90,12 @@ const spotReducer = (state = {}, action) => {
         case SPOT_DETAIL:
             newState[action.spot.id] = action.spot;
             return newState;
+        case GET_ID:
+            newState = {}
+            action.spots.forEach((spot) => {
+                newState[spot.id] = spot
+            });
+            return newState
         default:
             return state;
     }

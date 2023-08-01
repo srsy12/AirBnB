@@ -9,6 +9,9 @@ import SpotsBrowser from "./components/SpotsBroswer/SpotsBrowser";
 import SpotDetails from "./components/SpotDetails/SpotDetails";
 import CreateSpot from "./components/CreateSpot/CreateSpot";
 import PostReview from "./components/PostReview/PostReview";
+import ManageSpots from "./components/ManageSpots/ManageSpots";
+import DeleteForm from "./components/DeleteForm/DeleteForm";
+import UpdateForm from "./components/UpdateForm/UpdateForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,13 +34,22 @@ function App() {
           <Route path="/spots/:spotId/reviews">
             <PostReview />
           </Route>
+          <Route exact path="/spots/current">
+            <ManageSpots />
+          </Route>
+          <Route path="/spots/:spotId/delete">
+            <DeleteForm />
+          </Route>
+          <Route path="/spots/:spotId/update">
+            <UpdateForm />
+          </Route>
           <Route path="/spots/:spotId">
             <SpotDetails />
           </Route>
           <Route path="/spots">
             <CreateSpot />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <SpotsBrowser />
           </Route>
         </Switch>
