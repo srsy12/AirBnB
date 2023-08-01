@@ -1,0 +1,109 @@
+/* SpotsBrowser.css */
+
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for the entire component */
+.spots-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Title for the component */
+.spots-title {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Grid layout for spots */
+.spots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Individual spot item */
+.spot-item {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 15px;
+    transition: transform 0.3s ease;
+}
+
+.spot-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Spot image */
+.spot-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Spot name */
+.spot-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Spot location (city and state) */
+.spot-location {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Spot price */
+.spot-price {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Spot rating */
+.spot-rating {
+    display: flex;
+    align-items: center;
+}
+
+.spot-rating i.fa-solid.fa-star {
+    color: #ff385c;
+    margin-right: 5px;
+}
+
+.spot-rating span {
+    font-size: 14px;
+}
+
+/* Prevent NavLink from turning purple or underlined when clicked */
+.spots-container a,
+.spots-container a:hover,
+.spots-container a:active,
+.spots-container a:focus {
+    color: inherit;
+    text-decoration: none;
+    box-shadow: 0 5px 4px black;
+}
+
+/* Style for the navigation links */
+.nav-link {
+    color: #222;
+    text-decoration: none;
+    margin-right: 20px;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #ff385c;
+}

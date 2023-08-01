@@ -22,7 +22,6 @@ export const getReviewsById = (id) => async dispatch => {
 
         if (response.ok) {
             const reviews = await response.json();
-            console.log(reviews)
             dispatch(loadSpotReviews(reviews))
             return reviews;
         }

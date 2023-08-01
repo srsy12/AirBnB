@@ -48,7 +48,6 @@ const PostReview = () => {
             history.push(`/spots/${spotId}`)
         }
 
-        console.log(validationErrors)
     };
     const avgRating = () => {
         const starsArray = [];

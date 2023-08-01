@@ -1,18 +1,16 @@
 import { getReviewsById } from '../../store/reviews';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
 import { getSpotId } from '../../store/spots';
 import './SpotDetails.css'; // Import the SpotDetails.css file for styling
-import PostReview from '../PostReview/PostReview';
 
 const SpotDetails = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spotState[spotId]);
     const reviews = useSelector(state => state.reviewState[spotId])
-    // console.log(spot);
-    // console.log(reviews);
+
 
     useEffect(() => {
         dispatch(getSpotId(spotId));
@@ -53,7 +51,7 @@ const SpotDetails = () => {
                             <div>No Reviews Yet for This Spot</div>
                         )}
                     </div>
-                    <a href="#" className="reserve-button">Reserve</a>
+                    <button className="reserve-button">Reserve</button>
                 </div>
             )}
         </div>
