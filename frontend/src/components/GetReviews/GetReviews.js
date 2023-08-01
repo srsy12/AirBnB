@@ -9,8 +9,7 @@ import { getReviewsById } from '../../store/reviews';
 const GetReviews = ({ spotId }) => {
     const dispatch = useDispatch();
     const reviews = useSelector(state => state.reviewState[spotId])
-    // console.log(spot);
-    console.log(reviews);
+
 
     useEffect(() => {
         if (reviews) dispatch(getReviewsById(spotId));
