@@ -24,8 +24,20 @@ function LoginFormPage() {
         );
     };
 
+    let button;
+    if (credential.length < 4) {
+        button = <button type="submit" disabled>Log In</button>
+    } else {
+        button = <button type="submit">Log In</button>
+    }
+    if (password.length < 6) {
+        button = <button type="submit" disabled>Log In</button>
+    } else {
+        button = <button type="submit">Log In</button>
+    }
+
     return (
-        <>
+        <div id="loginformcontainer">
             <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
                 <label>
@@ -47,9 +59,9 @@ function LoginFormPage() {
                     />
                 </label>
                 {errors.credential && <p>{errors.credential}</p>}
-                <button type="submit">Log In</button>
+                {button}
             </form>
-        </>
+        </div>
     );
 }
 

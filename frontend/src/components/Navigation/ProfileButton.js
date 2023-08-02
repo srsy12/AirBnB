@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
-import { NavLink } from "react-router-dom";
 import * as sessionActions from '../../store/session';
-import './ProfileButton.css';
+import OpenModalButton from '../Modal/Modal';
+import LoginFormPage from '../LoginFormPage';
+import SignupFormPage from "../SignupFormPage";
+import { NavLink, useHistory } from "react-router-dom";
+// import './ProfileButton.css'
 
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
+    const history = useHistory()
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
 
@@ -31,29 +35,53 @@ function ProfileButton({ user }) {
     const logout = (e) => {
         e.preventDefault();
         dispatch(sessionActions.logout());
+        history.push('/')
     };
 
-    const ulClassName = `profile-dropdown ${showMenu ? "" : "hidden"}`; // Updated class name here
+    const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+    let credential = "Demo-lition";
+    let password = 'password';
 
     return (
         <div className="header">
             <div className="header-right">
-                {/* ProfileButton */}
-                <button onClick={openMenu}>
+
+                <button id="profile-button" onClick={openMenu}>
                     <i className="fas fa-user-circle" />
                 </button>
-                {showMenu && ( // Conditionally render the logout button inside the dropdown
-                    <ul className={ulClassName} ref={ulRef}>
-                        <li>{user.username}</li>
-                        <li>{user.firstName} {user.lastName}</li>
-                        <li>{user.email}</li>
-                        <NavLink to={`/spots/current`} >
-                            Manage Spots
-                        </NavLink>
-                        <li>
-                            <button onClick={logout}>Log Out</button>
-                        </li>
-                    </ul>
+                {showMenu && (
+                    <div>
+                        {user ? (
+                            <div className="menucontainer">
+                                <ul className={ulClassName} ref={ulRef}>
+                                    <li>Hello, {user.username}</li>
+                                    <li>{user.email}</li>
+                                    <NavLink to={`/spots/current`} >
+                                        Manage Spots
+                                    </NavLink>
+                                    <li>
+                                        <button onClick={logout}>Log Out</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        ) : (
+                            <ul className={ulClassName} ref={ulRef}>
+                                <div>
+                                    <OpenModalButton
+                                        buttonName="Log In"
+                                        modalComponent={<LoginFormPage />}
+                                    />
+                                </div>
+                                <div>
+                                    <OpenModalButton
+                                        buttonName="Sign Up"
+                                        modalComponent={<SignupFormPage />}
+                                    />
+                                </div>
+                                <button onClick={() => dispatch(sessionActions.login({ credential, password }))}>Log in as Demo User</button>
+                            </ul>
+                        )}
+                    </div>
                 )}
             </div>
         </div>

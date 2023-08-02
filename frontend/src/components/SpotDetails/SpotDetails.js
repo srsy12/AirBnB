@@ -4,18 +4,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
 import { getSpotId } from '../../store/spots';
 import './SpotDetails.css'; // Import the SpotDetails.css file for styling
+import OpenModalButton from '../Modal/Modal';
+import PostReview from '../PostReview/PostReview';
+import SpotsBrowser from '../SpotsBroswer/SpotsBrowser';
+import DeleteReview from '../DeleteReview/DeleteReview';
 
 const SpotDetails = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spotState[spotId]);
     const reviews = useSelector(state => state.reviewState[spotId])
+    const user = useSelector(state => state.session.user)
 
 
     useEffect(() => {
         dispatch(getSpotId(spotId));
         dispatch(getReviewsById(spotId))
     }, [dispatch, spotId]);
+
 
     return (
         <div className="spot-details-container">
@@ -34,9 +40,12 @@ const SpotDetails = () => {
                         <i className="fa-solid fa-star"></i>
                     </div>
                     <p className="spot-description">{spot?.description}</p>
-                    <NavLink to={`/spots/${spot.id}/reviews`} className="post-review-link">
-                        Post a Review
-                    </NavLink>
+                    {user && user?.id !== spot.Owner?.id && (
+                        <OpenModalButton
+                            buttonName="Post Review"
+                            modalComponent={<PostReview />}
+                        />
+                    )}
                     <div className="reviews-container">
                         {reviews && reviews.length > 0 ? (
                             <div>
@@ -44,6 +53,12 @@ const SpotDetails = () => {
                                     <div key={review.id} className="review-item">
                                         <h2 className="review-date">{new Date(review.createdAt).toLocaleString('en-US', { month: 'long' })} {new Date(review.createdAt).getDate()}</h2>
                                         <p className="review-text">{review.review}</p>
+                                        {user && review && user.id === review.userId && (
+                                            <OpenModalButton
+                                                buttonName="DeleteReview"
+                                                modalComponent={<DeleteReview reviewId={review.id} />}
+                                            />
+                                        )}
                                     </div>
                                 ))}
                             </div>

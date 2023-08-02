@@ -1,4 +1,4 @@
-/* ProfileButton.css */
+ProfileButton.css
 
 /* Style for the header container */
 .header {
@@ -40,9 +40,7 @@
 .profile-dropdown {
     position: absolute;
     top: 50px;
-    /* Adjust this value to control the vertical positioning */
     right: 10px;
-    /* Adjust this value to control the horizontal positioning */
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -72,4 +70,8 @@
 /* Hide the dropdown menu when "showMenu" is false */
 .profile-dropdown.hidden {
     display: none;
+}
+
+#profile-button {
+    position: relative;
 }

@@ -1,17 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { createReview } from '../../store/reviews';
+import { context } from '../Modal/Modal'
 import './PostReview.css'
+import { getSpotId } from '../../store/spots';
+import { getReviewsById } from '../../store/reviews';
 
 const PostReview = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
-    const history = useHistory();
     const [review, setReview] = useState('');
     const [stars, setStars] = useState('');
     const [validationErrors, setValidationErrors] = useState({});
+    const { setModal } = useContext(context)
     const updateReview = (e) => setReview(e.target.value);
 
     // useEffect(() => {
@@ -45,7 +48,9 @@ const PostReview = () => {
             }
         );
         if (createdReview) {
-            history.push(`/spots/${spotId}`)
+            setModal(false)
+            dispatch(getSpotId(spotId));
+            dispatch(getReviewsById(spotId));
         }
 
     };
@@ -82,23 +87,26 @@ const PostReview = () => {
     }
 
     return (
-        <section>
-            <form onSubmit={handleSubmit} className='new-review-form'>
-                <h1>How Was Your Stay?</h1>
-                <div>
-                    <div className="error">
-                        {errorMessage}
+        <div id='postreviewform'>
+
+            <section>
+                <form onSubmit={handleSubmit} className='new-review-form'>
+                    <h1>How Was Your Stay?</h1>
+                    <div>
+                        <div className="error">
+                            {errorMessage}
+                        </div>
+                        <input
+                            type="string"
+                            placeholder="Leave your review here..."
+                            value={review}
+                            onChange={updateReview} />
                     </div>
-                    <input
-                        type="string"
-                        placeholder="Leave your review here..."
-                        value={review}
-                        onChange={updateReview} />
-                </div>
-                <div>{avgRating()}</div>
-                {button}
-            </form>
-        </section>
+                    <div>{avgRating()}</div>
+                    {button}
+                </form>
+            </section>
+        </div>
     )
 };
 

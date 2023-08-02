@@ -30,7 +30,7 @@ const SpotsBrowser = () => {
                                 <h3 className="spot-location">{spot.state}</h3>
                                 <h4 className="spot-price">${spot.price}/night</h4>
                                 <h4 className="spot-rating">
-                                    {spot.avgRating ? spot.avgRating : 'NEW'}
+                                    {spot.avgRating !== "0.00" ? spot.avgRating : 'NEW'}
                                     <i className="fa-solid fa-star"></i>
                                 </h4>
                             </div>

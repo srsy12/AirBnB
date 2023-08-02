@@ -13,3 +13,10 @@
 .new-review-form .star.active {
     color: black;
 }
+
+#postreviewform {
+    background-color: white;
+    border: 1px solid black;
+    position: fixed;
+    z-index: 1000;
+}

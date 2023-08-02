@@ -40,11 +40,48 @@ function SignupFormPage() {
             confirmPassword: "Confirm Password field must be the same as the Password field"
         });
     };
+    let button;
+    if (username.length < 4) {
+        button = <button type="submit" disabled>Sign Up</button>
+    } else {
+        button = <button type="submit">Sign Up</button>
+    }
+    if (password.length < 6) {
+        button = <button type="submit" disabled>Sign Up</button>
+    } else {
+        button = <button type="submit">Sign Up</button>
+    }
+    if (!email) {
+        button = <button type="submit" disabled>Sign Up</button>
+    } else {
+        button = <button type="submit">Sign Up</button>
+    }
+    if (!firstName) {
+        button = <button type="submit" disabled>Sign Up</button>
+    } else {
+        button = <button type="submit">Sign Up</button>
+    }
+    if (!lastName) {
+        button = <button type="submit" disabled>Sign Up</button>
+    } else {
+        button = <button type="submit">Sign Up</button>
+    }
+    if (!confirmPassword) {
+        button = <button type="submit" disabled>Sign Up</button>
+    } else {
+        button = <button type="submit">Sign Up</button>
+    }
 
     return (
-        <>
+        <div id="signupformcontainer">
             <h1>Sign Up</h1>
             <form onSubmit={handleSubmit}>
+                {errors.email && <p>{errors.email}</p>}
+                {errors.username && <p>{errors.username}</p>}
+                {errors.firstName && <p>{errors.firstName}</p>}
+                {errors.lastName && <p>{errors.lastName}</p>}
+                {errors.password && <p>{errors.password}</p>}
+                {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
                 <label>
                     Email
                     <input
@@ -54,7 +91,6 @@ function SignupFormPage() {
                         required
                     />
                 </label>
-                {errors.email && <p>{errors.email}</p>}
                 <label>
                     Username
                     <input
@@ -64,7 +100,6 @@ function SignupFormPage() {
                         required
                     />
                 </label>
-                {errors.username && <p>{errors.username}</p>}
                 <label>
                     First Name
                     <input
@@ -74,7 +109,6 @@ function SignupFormPage() {
                         required
                     />
                 </label>
-                {errors.firstName && <p>{errors.firstName}</p>}
                 <label>
                     Last Name
                     <input
@@ -84,7 +118,6 @@ function SignupFormPage() {
                         required
                     />
                 </label>
-                {errors.lastName && <p>{errors.lastName}</p>}
                 <label>
                     Password
                     <input
@@ -94,7 +127,6 @@ function SignupFormPage() {
                         required
                     />
                 </label>
-                {errors.password && <p>{errors.password}</p>}
                 <label>
                     Confirm Password
                     <input
@@ -104,10 +136,9 @@ function SignupFormPage() {
                         required
                     />
                 </label>
-                {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-                <button type="submit">Sign Up</button>
+                {button}
             </form>
-        </>
+        </div>
     );
 }
 

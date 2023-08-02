@@ -1,12 +1,14 @@
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteSpotId, getSpotId } from "../../store/spots";
-import { useEffect } from "react";
+import { deleteSpotId, getSpotId, getSpotsById } from "../../store/spots";
+import { context } from '../Modal/Modal'
+import { useEffect, useContext } from "react";
+import './DeleteForm.css'
 
-const DeleteForm = () => {
+const DeleteForm = ({ spotId }) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { spotId } = useParams();
+    const { setModal } = useContext(context)
     const spot = useSelector(state => state.spotState[spotId]);
 
     useEffect(() => {
@@ -17,13 +19,14 @@ const DeleteForm = () => {
         if (spot) {
             const deletedSpot = dispatch(deleteSpotId(spotId));
             if (deletedSpot) {
-                history.push(`/spots/current`)
+                setModal(false)
+                dispatch(getSpotsById());
             }
         }
     };
 
     return (
-        <div>
+        <div id="deleteformcontainer">
             <h1>Confirm Delete</h1>
             <p>Are you sure you want to remove this spot from the listings?</p>
             <button onClick={() => handleDelete()} >Yes</button> <button onClick={() => history.push(`/spots/current`)}>No</button>
