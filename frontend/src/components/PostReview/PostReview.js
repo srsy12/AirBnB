@@ -54,6 +54,7 @@ const PostReview = () => {
         }
 
     };
+
     const avgRating = () => {
         const starsArray = [];
         for (let i = 0; i < 5; i++) {
@@ -71,7 +72,7 @@ const PostReview = () => {
     }
 
     let button;
-    if (review.length < 10) {
+    if (review.length < 10 || !stars) {
         button = <button type="submit" disabled>Submit Your Review</button>
     } else {
         button = <button type="submit">Submit Your Review</button>
@@ -102,7 +103,7 @@ const PostReview = () => {
                             value={review}
                             onChange={updateReview} />
                     </div>
-                    <div>{avgRating()}</div>
+                    <div>{avgRating()} Stars</div>
                     {button}
                 </form>
             </section>

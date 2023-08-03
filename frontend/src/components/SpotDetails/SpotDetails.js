@@ -17,56 +17,70 @@ const SpotDetails = () => {
     const user = useSelector(state => state.session.user)
 
 
+
+
+
     useEffect(() => {
         dispatch(getSpotId(spotId));
         dispatch(getReviewsById(spotId))
     }, [dispatch, spotId]);
+
+    const found = reviews?.find(review => review.userId === user?.id)
+
 
 
     return (
         <div className="spot-details-container">
             {spot && (
                 <div className="spot-details">
+                    <h1 className="spot-name">{spot?.name}</h1>
+                    <h2 className="spot-location">{spot?.city}, {spot?.state}, {spot?.country}</h2>
                     <div className="spot-images">
                         {spot.SpotImages?.map((image) => (
                             <img key={image.id} src={image.url} alt={spot.name} className="spot-image" />
                         ))}
                     </div>
-                    <h1 className="spot-name">{spot?.name}</h1>
-                    <h2 className="spot-location">{spot?.city}, {spot?.state}, {spot?.country}</h2>
                     <h2 className="spot-host">Hosted By {spot.Owner?.firstName} {spot.Owner?.lastName}</h2>
                     <div className="spot-rating">
-                        <h4>{spot.avgRating ? spot.avgRating : 'NEW'}</h4>
+                        <h4>{spot.avgRating !== "0.00" ? spot.avgRating : 'NEW'}</h4>
                         <i className="fa-solid fa-star"></i>
+                        {spot.numReviews === 1 ? (
+                            <div>{spot.numReviews} review</div>
+
+                        ) : (
+                            <div>{spot.numReviews} reviews</div>
+                        )}
                     </div>
                     <p className="spot-description">{spot?.description}</p>
-                    {user && user?.id !== spot.Owner?.id && (
+                    {!found && user && user?.id !== spot.Owner?.id && (
                         <OpenModalButton
                             buttonName="Post Review"
                             modalComponent={<PostReview />}
                         />
                     )}
                     <div className="reviews-container">
-                        {reviews && reviews.length > 0 ? (
+                        {reviews && reviews.length > 0 && (
                             <div>
                                 {reviews?.map((review) => (
                                     <div key={review.id} className="review-item">
-                                        <h2 className="review-date">{new Date(review.createdAt).toLocaleString('en-US', { month: 'long' })} {new Date(review.createdAt).getDate()}</h2>
-                                        <p className="review-text">{review.review}</p>
+                                        <div>{review.User.firstName}</div>
+                                        <div className="review-date">{new Date(review.createdAt).toLocaleString('en-US', { month: 'long' })} {new Date(review.createdAt).getFullYear()}</div>
+                                        <div className="review-text">{review.review}</div>
                                         {user && review && user.id === review.userId && (
                                             <OpenModalButton
-                                                buttonName="DeleteReview"
+                                                buttonName="Delete"
                                                 modalComponent={<DeleteReview reviewId={review.id} />}
                                             />
                                         )}
                                     </div>
                                 ))}
                             </div>
-                        ) : (
-                            <div>No Reviews Yet for This Spot</div>
+                        )}
+                        {user && user?.id !== spot.Owner?.id && (
+                            <div>Be the first to post a review!</div>
                         )}
                     </div>
-                    <button className="reserve-button">Reserve</button>
+                    <button className="reserve-button" onClick={() => window.alert("Feature coming soon")}>Reserve</button>
                 </div>
             )}
         </div>

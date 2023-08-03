@@ -162,7 +162,7 @@ const CreateSpot = () => {
                 <div>
                     <input
                         type="string"
-                        placeholder="country"
+                        placeholder="Country"
                         value={country}
                         onChange={updateCountry} />
                     <div className="error">
@@ -173,7 +173,7 @@ const CreateSpot = () => {
                 <div>
                     <input
                         type="string"
-                        placeholder="address"
+                        placeholder="Street Address"
                         value={address}
                         onChange={updateAddress} />
                     <div className="error">
@@ -184,7 +184,7 @@ const CreateSpot = () => {
                 <div>
                     <input
                         type="string"
-                        placeholder="city"
+                        placeholder="City"
                         value={city}
                         onChange={updateCity} />
                     <div className="error">
@@ -195,7 +195,7 @@ const CreateSpot = () => {
                 <div>
                     <input
                         type="string"
-                        placeholder="STATE"
+                        placeholder="State"
                         value={state}
                         onChange={updateState} />
                     <div className="error">
@@ -224,23 +224,23 @@ const CreateSpot = () => {
                 <div>
                     <input
                         type="string"
-                        placeholder="Name"
-                        value={name}
-                        onChange={updateName} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.name &&
-                            `* ${validationErrors.name}`}
-                    </div>
-                </div>
-                <div>
-                    <input
-                        type="string"
-                        placeholder="Description"
+                        placeholder="Please write at least 30 characters"
                         value={description}
                         onChange={updateDescription} />
                     <div className="error">
                         {hasSubmitted && validationErrors.description &&
                             `* ${validationErrors.description}`}
+                    </div>
+                </div>
+                <div>
+                    <input
+                        type="string"
+                        placeholder="Name of your Spot"
+                        value={name}
+                        onChange={updateName} />
+                    <div className="error">
+                        {hasSubmitted && validationErrors.name &&
+                            `* ${validationErrors.name}`}
                     </div>
                 </div>
                 <div>

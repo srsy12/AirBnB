@@ -13,14 +13,18 @@ const OpenModalButton = ({ buttonName, modalComponent }) => {
 
     return (
         <context.Provider value={{ setModal }}>
-            <div onClick={() => { if (modal === false) setModal(true) }}>
+            <div className='button-container' onClick={() => { if (modal === false) setModal(true) }}>
                 <button onClick={toggleModal}>
                     {buttonName}
                 </button>
                 {modal && (
-                    <div >
-                        <div className="overlay" onClick={toggleModal}></div>
-                        {modalComponent}
+                    <div className="overlay" >
+                        <div className="modal-content">
+                            <div className="buttondiv">
+                                <button onClick={toggleModal}>X</button>
+                            </div>
+                            {modalComponent}
+                        </div>
                     </div>
                 )}
             </div>

@@ -25,14 +25,14 @@ const SpotsBrowser = () => {
                         <NavLink to={`/spots/${spot.id}`} title={spot.name}>
                             <div>
                                 <img src={spot.previewImage} className="spot-image" alt="Spot Preview" />
-                                <h1 className="spot-name">{spot.name}</h1>
-                                <h3 className="spot-location">{spot.city}</h3>
-                                <h3 className="spot-location">{spot.state}</h3>
-                                <h4 className="spot-price">${spot.price}/night</h4>
-                                <h4 className="spot-rating">
-                                    {spot.avgRating !== "0.00" ? spot.avgRating : 'NEW'}
-                                    <i className="fa-solid fa-star"></i>
-                                </h4>
+                                <div className="spot-name">{spot.name}
+                                    <div className='spot-rating'>
+                                        {spot.avgRating !== "0.00" ? spot.avgRating : 'NEW'}
+                                        <i className="fa-solid fa-star"></i>
+                                    </div>
+                                </div>
+                                <div className="spot-location">{spot.city}, {spot.state} </div>
+                                <div className="spot-price">${spot.price}/night</div>
                             </div>
                         </NavLink>
                     </div>

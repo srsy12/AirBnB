@@ -7,7 +7,6 @@ import './DeleteForm.css'
 
 const DeleteForm = ({ spotId }) => {
     const dispatch = useDispatch();
-    const history = useHistory();
     const { setModal } = useContext(context)
     const spot = useSelector(state => state.spotState[spotId]);
 
@@ -28,9 +27,16 @@ const DeleteForm = ({ spotId }) => {
     return (
         <div id="deleteformcontainer">
             <h1>Confirm Delete</h1>
-            <p>Are you sure you want to remove this spot from the listings?</p>
-            <button onClick={() => handleDelete()} >Yes</button> <button onClick={() => history.push(`/spots/current`)}>No</button>
-        </div>
+            <p>Are you sure you want to remove this spot?</p>
+            <div id="button-container">
+                <button id="yesDelete" onClick={() => handleDelete()} >Yes (Delete Spot)</button>
+                <button id="noDelete" onClick={() => {
+                    dispatch(getSpotsById());
+                    setModal(false)
+                }}>No (Keep Spot)</button>
+            </div>
+
+        </div >
     );
 };
 
