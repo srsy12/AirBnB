@@ -29,8 +29,8 @@ const DeleteReview = ({ reviewId }) => {
     return (
         <div id="deletereviewform">
             <h1>Confirm Delete</h1>
-            <p>Are you sure you want to remove this Review</p>
-            <button onClick={() => handleDelete()} >Yes</button> <button onClick={() => setModal(false)}>No</button>
+            <div id="deletetext">Are you sure you want to delete this review</div>
+            <button id="yesdelete" onClick={() => handleDelete()} >Yes (Delete Review)</button> <button id="nodelete" onClick={() => setModal(false)}>No (Keep Review)</button>
         </div>
     );
 };

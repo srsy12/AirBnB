@@ -1,3 +1,12 @@
-.hidden {
+/* Style for the dropdown menu items */
+.profile-dropdown li {
+    list-style: none;
+    padding: 5px;
+    font-size: 14px;
+}
+
+
+/* Hide the dropdown menu when "showMenu" is false */
+.profile-dropdown.hidden {
     display: none;
 }

@@ -34,7 +34,7 @@ body {
     background-color: #f9f9f9;
     border-radius: 5px;
     padding: 15px;
-    transition: transform 0.3s ease;
+    /* border: 1px solid rgb(128, 128, 128, .3); */
 }
 
 
@@ -49,7 +49,7 @@ body {
 
 /* Spot name */
 .spot-name {
-    font-size: 20px;
+    font-size: 10px;
     font-weight: bold;
     margin-bottom: 5px;
     display: flex;

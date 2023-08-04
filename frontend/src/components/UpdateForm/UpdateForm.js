@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { updateSpot, getSpotId } from '../../store/spots';
+import './UpdateForm.css'
 
 const UpdateForm = () => {
     const dispatch = useDispatch();
@@ -91,98 +92,137 @@ const UpdateForm = () => {
 
 
     return (
-        <section>
+        <div className='createSpotContainer'>
+            <div className='headingInfo'>
+                <div className='createTitle'>Update your Spot</div>
+            </div>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <input
-                        type="string"
-                        value={spot && (country ? country : setCountry(spot.country))}
-                        onChange={updateCountry} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.country &&
-                            `* ${validationErrors.country}`}
+                <div className='spotlocationdetails'>
+                    <div className='subheader'>Where's Your Place Located</div>
+                    <div className='captioninfo'>Guests will only get your exact address once they booked a reservation</div>
+                    <div>
+                        <div className='labelfield'>
+                            <div>Country</div>
+                            <div className="error">
+                                {hasSubmitted && validationErrors.country &&
+                                    `* ${validationErrors.country}`}
+                            </div>
+                        </div>
+                        <input
+                            type="string"
+                            value={spot && (country ? country : setCountry(spot.country))}
+                            onChange={updateCountry} />
+                    </div>
+                    <div>
+                        <div className='labelfield'>
+                            <div>Address</div>
+                            <div className="error">
+                                {hasSubmitted && validationErrors.address &&
+                                    `* ${validationErrors.address}`}
+                            </div>
+                        </div>
+                        <input
+                            type="string"
+                            value={spot && (address ? address : setAddress(spot.address))}
+                            onChange={updateAddress} />
+                    </div>
+                    <div className='sidebyside'>
+                        <div>
+                            <div className='labelfield'>
+                                <div>City</div>
+                                <div className="error">
+                                    {hasSubmitted && validationErrors.city &&
+                                        `* ${validationErrors.city}`}
+                                </div>
+                            </div>
+                            <input
+                                type="string"
+                                value={spot && (city ? city : setCity(spot.city))}
+                                onChange={updateCity} />
+                        </div>
+                        <div>
+                            <div className='labelfield'>
+                                <div>State</div>
+                                <div className="error">
+                                    {hasSubmitted && validationErrors.state &&
+                                        `* ${validationErrors.state}`}
+                                </div>
+                            </div>
+                            <input
+                                type="string"
+                                value={spot && (state ? state : setState(spot.state))}
+                                onChange={updateState} />
+                        </div>
+                    </div>
+                    <div className='sidebyside'>
+                        <div>
+                            <input
+                                type="number"
+                                min="-90"
+                                max="90"
+                                value={spot && (lat ? lat : setLat(spot.lat))}
+                                onChange={updateLat} />
+                        </div>
+                        <div>
+                            <input
+                                type="number"
+                                min="-180"
+                                max="180"
+                                value={spot && (lng ? lng : setLng(spot.lng))}
+                                onChange={updateLng} />
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <input
-                        type="string"
-                        value={spot && (address ? address : setAddress(spot.address))}
-                        onChange={updateAddress} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.address &&
-                            `* ${validationErrors.address}`}
+                <div className='descriptionContainer'>
+                    <div className='subheader'>Describe your place to guests</div>
+                    <div className='captioninfo'>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood</div>
+                    <div>
+                        <textarea
+                            type="string"
+                            value={spot && (description ? description : setDescription(spot.description))}
+                            onChange={updateDescription} />
+                        <div className="error">
+                            {hasSubmitted && validationErrors.description &&
+                                `* ${validationErrors.description}`}
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <input
-                        type="string"
-                        value={spot && (city ? city : setCity(spot.city))}
-                        onChange={updateCity} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.city &&
-                            `* ${validationErrors.city}`}
+                <div className='descriptionContainer'>
+                    <div className='subheader'>Create a title for your spot</div>
+                    <div className='captioninfo'>Catch guests' attention with a spot title that highlights what makes
+                        your place special</div>
+                    <div>
+                        <input
+                            type="string"
+                            value={spot && (name ? name : setName(spot.name))}
+                            onChange={updateName} />
+                        <div className="error">
+                            {hasSubmitted && validationErrors.name &&
+                                `* ${validationErrors.name}`}
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <input
-                        type="string"
-                        value={spot && (state ? state : setState(spot.state))}
-                        onChange={updateState} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.state &&
-                            `* ${validationErrors.state}`}
+                <div className='descriptionContainer'>
+                    <div className='subheader'>Set a base price for your spot</div>
+                    <div className='captioninfo'>Competitive pricing can help your listing stand out and rank higher
+                        in search results</div>
+                    <div>
+                        <input
+                            type="number"
+                            min="0"
+                            value={spot && (price ? price : setPrice(spot.price))}
+                            onChange={updatePrice} />
+                        <div className="error">
+                            {hasSubmitted && validationErrors.price &&
+                                `* ${validationErrors.price}`}
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <input
-                        type="number"
-                        min="-90"
-                        max="90"
-                        value={spot && (lat ? lat : setLat(spot.lat))}
-                        onChange={updateLat} />
+                <div className='spotbuttcontainer'>
+                    <button className="createspotbutt" type="submit">Update Spot</button>
                 </div>
-                <div>
-                    <input
-                        type="number"
-                        min="-180"
-                        max="180"
-                        value={spot && (lng ? lng : setLng(spot.lng))}
-                        onChange={updateLng} />
-                </div>
-                <div>
-                    <input
-                        type="string"
-                        value={spot && (name ? name : setName(spot.name))}
-                        onChange={updateName} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.name &&
-                            `* ${validationErrors.name}`}
-                    </div>
-                </div>
-                <div>
-                    <input
-                        type="string"
-                        value={spot && (description ? description : setDescription(spot.description))}
-                        onChange={updateDescription} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.description &&
-                            `* ${validationErrors.description}`}
-                    </div>
-                </div>
-                <div>
-                    <input
-                        type="number"
-                        min="0"
-                        value={spot && (price ? price : setPrice(spot.price))}
-                        onChange={updatePrice} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.price &&
-                            `* ${validationErrors.price}`}
-                    </div>
-                </div>
-                <button type="submit">Update Spot</button>
             </form>
-        </section>
+        </div>
     );
 };
 

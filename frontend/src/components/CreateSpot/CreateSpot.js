@@ -157,162 +157,211 @@ const CreateSpot = () => {
 
 
     return (
-        <section>
+        <div className='createSpotContainer'>
+            <div className='headingInfo'>
+                <div className='createTitle'>Create a New Spot</div>
+            </div>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <input
-                        type="string"
-                        placeholder="Country"
-                        value={country}
-                        onChange={updateCountry} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.country &&
-                            `* ${validationErrors.country}`}
+                <div className='spotlocationdetails'>
+                    <div className='subheader'>Where's Your Place Located</div>
+                    <div className='captioninfo'>Guests will only get your exact address once they booked a reservation</div>
+                    <div>
+                        <div className='labelfield'>
+                            <div>Country</div>
+                            <div className="error">
+                                {hasSubmitted && validationErrors.country &&
+                                    `* ${validationErrors.country}`}
+                            </div>
+                        </div>
+                        <input
+                            type="string"
+                            placeholder="Country"
+                            value={country}
+                            onChange={updateCountry} />
+                    </div>
+                    <div>
+                        <div className='labelfield'>
+                            <div>Address</div>
+                            <div className="error">
+                                {hasSubmitted && validationErrors.address &&
+                                    `* ${validationErrors.address}`}
+                            </div>
+                        </div>
+                        <input
+                            type="string"
+                            placeholder="Street Address"
+                            value={address}
+                            onChange={updateAddress} />
+                    </div>
+                    <div className='sidebyside'>
+                        <div>
+                            <div className='labelfield'>
+                                <div>City</div>
+                                <div className="error">
+                                    {hasSubmitted && validationErrors.city &&
+                                        `* ${validationErrors.city}`}
+                                </div>
+                            </div>
+                            <input
+                                type="string"
+                                placeholder="City"
+                                value={city}
+                                onChange={updateCity} />
+                        </div>
+                        <div>
+                            <div className='labelfield'>
+                                <div>State</div>
+                                <div className="error">
+                                    {hasSubmitted && validationErrors.state &&
+                                        `* ${validationErrors.state}`}
+                                </div>
+                            </div>
+                            <input
+                                type="string"
+                                placeholder="State"
+                                value={state}
+                                onChange={updateState} />
+                        </div>
+                    </div>
+                    <div className='sidebyside'>
+                        <div>
+                            <div className='labelfield'>
+                                <div>Latitutde</div>
+                            </div>
+                            <input
+                                type="number"
+                                placeholder="Latitutde"
+                                min="-90"
+                                max="90"
+                                value={lat}
+                                onChange={updateLat} />
+                        </div>
+                        <div>
+                            <div className='labelfield'>
+                                <div>Longitude</div>
+                            </div>
+                            <input
+                                type="number"
+                                placeholder="Longitude"
+                                min="-180"
+                                max="180"
+                                value={lng}
+                                onChange={updateLng} />
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <input
-                        type="string"
-                        placeholder="Street Address"
-                        value={address}
-                        onChange={updateAddress} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.address &&
-                            `* ${validationErrors.address}`}
+                <div className='descriptionContainer'>
+                    <div className='subheader'>Describe your place to guests</div>
+                    <div className='captioninfo'>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood</div>
+                    <div>
+                        <textarea
+                            type="string"
+                            placeholder="Please write at least 30 characters"
+                            value={description}
+                            onChange={updateDescription} />
+                        <div className="error">
+                            {hasSubmitted && validationErrors.description &&
+                                `* ${validationErrors.description}`}
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <input
-                        type="string"
-                        placeholder="City"
-                        value={city}
-                        onChange={updateCity} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.city &&
-                            `* ${validationErrors.city}`}
+                <div className='descriptionContainer'>
+                    <div className='subheader'>Create a title for your spot</div>
+                    <div className='captioninfo'>Catch guests' attention with a spot title that highlights what makes
+                        your place special</div>
+                    <div>
+                        <input
+                            type="string"
+                            placeholder="Name of your Spot"
+                            value={name}
+                            onChange={updateName} />
+                        <div className="error">
+                            {hasSubmitted && validationErrors.name &&
+                                `* ${validationErrors.name}`}
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <input
-                        type="string"
-                        placeholder="State"
-                        value={state}
-                        onChange={updateState} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.state &&
-                            `* ${validationErrors.state}`}
+                <div className='descriptionContainer'>
+                    <div className='subheader'>Set a base price for your spot</div>
+                    <div className='captioninfo'>Competitive pricing can help your listing stand out and rank higher
+                        in search results</div>
+                    <div>
+                        <input
+                            type="number"
+                            placeholder="Price per Night (USD)"
+                            min="0"
+                            value={price}
+                            onChange={updatePrice} />
+                        <div className="error">
+                            {hasSubmitted && validationErrors.price &&
+                                `* ${validationErrors.price}`}
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <input
-                        type="number"
-                        placeholder="Latitutde"
-                        min="-90"
-                        max="90"
-                        value={lat}
-                        onChange={updateLat} />
-                </div>
-                <div>
-                    <input
-                        type="number"
-                        placeholder="Longitude"
-                        min="-180"
-                        max="180"
-                        value={lng}
-                        onChange={updateLng} />
-                </div>
-                <div>
-                    <input
-                        type="string"
-                        placeholder="Please write at least 30 characters"
-                        value={description}
-                        onChange={updateDescription} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.description &&
-                            `* ${validationErrors.description}`}
+                <div className='descriptionContainer'>
+                    <div className='subheader'>Liven up your spot with photos</div>
+                    <div className='captioninfo'>Submit a link to at least one photo to publish your spot</div>
+                    <div>
+                        <input
+                            type="string"
+                            placeholder="Preview Image Url"
+                            value={url}
+                            onChange={updateUrl} />
+                        <div className="error">
+                            {hasSubmitted && validationErrors.url &&
+                                `* ${validationErrors.url}`}
+                        </div>
+                    </div>
+                    <div>
+                        <input
+                            type="string"
+                            placeholder="Image Url"
+                            value={url2}
+                            onChange={updateUrl2} />
+                        <div className="error">
+                            {hasSubmitted && validationErrors.url2 &&
+                                `* ${validationErrors.url2}`}
+                        </div>
+                    </div>
+                    <div>
+                        <input
+                            type="string"
+                            placeholder="Image Url"
+                            value={url3}
+                            onChange={updateUrl3} />
+                        <div className="error">
+                            {hasSubmitted && validationErrors.url3 &&
+                                `* ${validationErrors.url3}`}
+                        </div>
+                    </div>
+                    <div>
+                        <input
+                            type="string"
+                            placeholder="Image Url"
+                            value={url4}
+                            onChange={updateUrl4} />
+                        <div className="error">
+                            {hasSubmitted && validationErrors.url4 &&
+                                `* ${validationErrors.url4}`}
+                        </div>
+                    </div>
+                    <div>
+                        <input
+                            type="string"
+                            placeholder="Image Url"
+                            value={url5}
+                            onChange={updateUrl5} />
+                        <div className="error">
+                            {hasSubmitted && validationErrors.url5 &&
+                                `* ${validationErrors.url5}`}
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <input
-                        type="string"
-                        placeholder="Name of your Spot"
-                        value={name}
-                        onChange={updateName} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.name &&
-                            `* ${validationErrors.name}`}
-                    </div>
+                <div className='spotbuttcontainer'>
+                    <button className="createspotbutt" type="submit">Create Spot</button>
                 </div>
-                <div>
-                    <input
-                        type="number"
-                        placeholder="Price per Night (USD)"
-                        min="0"
-                        value={price}
-                        onChange={updatePrice} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.price &&
-                            `* ${validationErrors.price}`}
-                    </div>
-                </div>
-                <div>
-                    <input
-                        type="string"
-                        placeholder="Preview Image Url"
-                        value={url}
-                        onChange={updateUrl} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.url &&
-                            `* ${validationErrors.url}`}
-                    </div>
-                </div>
-                <div>
-                    <input
-                        type="string"
-                        placeholder="Image Url"
-                        value={url2}
-                        onChange={updateUrl2} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.url2 &&
-                            `* ${validationErrors.url2}`}
-                    </div>
-                </div>
-                <div>
-                    <input
-                        type="string"
-                        placeholder="Image Url"
-                        value={url3}
-                        onChange={updateUrl3} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.url3 &&
-                            `* ${validationErrors.url3}`}
-                    </div>
-                </div>
-                <div>
-                    <input
-                        type="string"
-                        placeholder="Image Url"
-                        value={url4}
-                        onChange={updateUrl4} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.url4 &&
-                            `* ${validationErrors.url4}`}
-                    </div>
-                </div>
-                <div>
-                    <input
-                        type="string"
-                        placeholder="Image Url"
-                        value={url5}
-                        onChange={updateUrl5} />
-                    <div className="error">
-                        {hasSubmitted && validationErrors.url5 &&
-                            `* ${validationErrors.url5}`}
-                    </div>
-                </div>
-                <button type="submit">Create Spot</button>
             </form>
-        </section>
+        </div>
     );
 }
 

@@ -1,5 +1,39 @@
 #deletereviewform {
-    background-color: white;
-    border: 1px solid black;
-    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+}
+
+#deletetext {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+#yesdelete {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: white;
+    width: 100%;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 15px;
+}
+
+#nodelete {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+    color: white;
+    width: 100%;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 15px;
 }

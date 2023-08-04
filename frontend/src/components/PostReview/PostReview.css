@@ -1,7 +1,5 @@
 .error {
     color: red;
-    height: 15px;
-    margin: 3px;
 }
 
 .new-review-form .star {
@@ -15,7 +13,58 @@
 }
 
 #postreviewform {
-    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+}
+
+#postreviewform textarea {
+    width: 100%;
     border: 1px solid black;
-    z-index: 1000;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 8px;
+    height: 100px;
+    resize: none;
+}
+
+#starRate {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px;
+}
+
+#reviewButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.workingbutton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: white;
+    width: 100%;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.disabledbutton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+    color: black;
+    width: 100%;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 15px;
 }

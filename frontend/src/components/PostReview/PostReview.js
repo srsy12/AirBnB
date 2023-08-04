@@ -73,9 +73,9 @@ const PostReview = () => {
 
     let button;
     if (review.length < 10 || !stars) {
-        button = <button type="submit" disabled>Submit Your Review</button>
+        button = <button type="submit" disabled='true' className='disabledbutton'>Submit Your Review</button>
     } else {
-        button = <button type="submit">Submit Your Review</button>
+        button = <button type="submit" className='workingbutton'>Submit Your Review</button>
     }
 
     let errorMessage;
@@ -89,24 +89,21 @@ const PostReview = () => {
 
     return (
         <div id='postreviewform'>
-
-            <section>
-                <form onSubmit={handleSubmit} className='new-review-form'>
-                    <h1>How Was Your Stay?</h1>
-                    <div>
-                        <div className="error">
-                            {errorMessage}
-                        </div>
-                        <input
-                            type="string"
-                            placeholder="Leave your review here..."
-                            value={review}
-                            onChange={updateReview} />
+            <form onSubmit={handleSubmit} className='new-review-form'>
+                <h2>How Was Your Stay?</h2>
+                <div>
+                    <div className="error">
+                        {errorMessage}
                     </div>
-                    <div>{avgRating()} Stars</div>
-                    {button}
-                </form>
-            </section>
+                    <textarea
+                        type="string"
+                        placeholder="Leave your review here..."
+                        value={review}
+                        onChange={updateReview} />
+                </div>
+                <div id='starRate'>{avgRating()} Stars</div>
+                <div id='reviewButton'>{button}</div>
+            </form>
         </div>
     )
 };

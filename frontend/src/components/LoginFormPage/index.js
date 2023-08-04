@@ -25,15 +25,10 @@ function LoginFormPage() {
     };
 
     let button;
-    if (credential.length < 4) {
-        button = <button type="submit" disabled >Log In</button>
+    if (credential.length < 4 || password.length < 6) {
+        button = <button type="submit" disabled='true' className='disabledbutton1' >Log In</button>
     } else {
-        button = <button type="submit">Log In</button>
-    }
-    if (password.length < 6) {
-        button = <button type="submit" disabled >Log In</button>
-    } else {
-        button = <button type="submit" >Log In</button>
+        button = <button type="submit" className='workingbutton1'>Log In</button>
     }
 
     let demoUser = {
