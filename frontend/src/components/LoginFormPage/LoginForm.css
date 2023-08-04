@@ -1,0 +1,57 @@
+#loginformcontainer form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+}
+
+#loginformcontainer input {
+    width: 100%;
+    border: 1px solid black;
+    padding: 8px;
+    font-size: 14px;
+}
+
+#loginformcontainer h1 {
+    text-align: center;
+}
+
+#loginformcontainer input {
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+#loginformcontainer .loginbutton button {
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 15px;
+    color: white;
+}
+
+.loginbutton {
+    background-color: red;
+    width: 94%;
+    height: 80%;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+
+}
+
+#demobutton {
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 15px;
+    color: black
+}
+
+#workingbutton1 {
+    color: white
+}

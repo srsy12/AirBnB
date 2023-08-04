@@ -162,7 +162,7 @@ router.get('/', validateQueries, async (req, res) => {
             group: ["Spot.id"],
         })
 
-        const avgRating = spotavgRating.dataValues.avgRating
+        const avgRating = Number(spotavgRating.dataValues.avgRating).toFixed(2)
 
         if (spotavgRating) spot.dataValues.avgRating = avgRating
     };
@@ -198,6 +198,7 @@ router.get('/current', requireAuth, async (req, res) => {
         group: ["Spot.id"]
     });
 
+
     for (const spot of spots) {
         const previewImage = await SpotImage.findOne({
             attributes: ['url'],
@@ -206,6 +207,9 @@ router.get('/current', requireAuth, async (req, res) => {
         if (previewImage) {
             spot.dataValues.previewImage = previewImage.dataValues.url;
         }
+        const avgRating = Number(spot.dataValues.avgRating).toFixed(2)
+
+        if (spot) spot.dataValues.avgRating = avgRating
     };
 
     results.spots = spots;
@@ -254,6 +258,10 @@ router.get('/:spotId', async (req, res) => {
         ],
         group: ["SpotImages.id", "Spot.id", "Owner.id"]
     });
+
+    const avgRating = Number(spot.dataValues.avgRating).toFixed(2)
+
+    if (spot) spot.dataValues.avgRating = avgRating
 
     if (spot) {
         return res.status(200).json(spot);

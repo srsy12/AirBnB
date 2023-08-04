@@ -24,32 +24,38 @@ function LoginFormPage() {
         );
     };
 
+    let button;
+    if (credential.length < 4 || password.length < 6) {
+        button = <button type="submit" disabled='true' className='disabledbutton1' >Log In</button>
+    } else {
+        button = <button type="submit" className='workingbutton1'>Log In</button>
+    }
+
+    let demoUser = {
+        credential: "Demo-lition",
+        password: "password"
+    }
     return (
-        <>
-            <h1>Log In</h1>
+        <div id="loginformcontainer">
             <form onSubmit={handleSubmit}>
-                <label>
-                    Username or Email
-                    <input
-                        type="text"
-                        value={credential}
-                        onChange={(e) => setCredential(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    Password
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </label>
+                <h1>Log In</h1>
                 {errors.credential && <p>{errors.credential}</p>}
-                <button type="submit">Log In</button>
+                <input
+                    type="text"
+                    placeholder="Username or Email"
+                    value={credential}
+                    onChange={(e) => setCredential(e.target.value)}
+                />
+                <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <div className="loginbutton">{button}</div>
+                <button id="demobutton" onClick={() => dispatch(sessionActions.login(demoUser))}>Log in as Demo User</button>
             </form>
-        </>
+        </div>
     );
 }
 

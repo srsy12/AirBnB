@@ -1,0 +1,35 @@
+/* #deleteformcontainer {
+    background-color: white;
+    border: 1px solid black;
+    z-index: 1000;
+} */
+
+#deleteformcontainer h1 {
+    text-align: center;
+}
+
+#deleteformcontainer #button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#deleteformcontainer #button-container button {
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 15px;
+}
+
+#yesDelete {
+    background-color: rgb(243, 67, 67);
+    color: white;
+    margin-bottom: 10px;
+}
+
+#noDelete {
+    background-color: grey;
+    color: white;
+}

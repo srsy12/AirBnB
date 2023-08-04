@@ -37,10 +37,10 @@ body {
     transition: transform 0.3s ease;
 }
 
-.spot-item:hover {
+/* .spot-item:hover {
     transform: scale(1.05);
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
-}
+} */
 
 /* Spot image */
 .spot-image {
@@ -78,7 +78,6 @@ body {
 }
 
 .spot-rating i.fa-solid.fa-star {
-    color: #ff385c;
     margin-right: 5px;
 }
 
@@ -88,7 +87,6 @@ body {
 
 /* Prevent NavLink from turning purple or underlined when clicked */
 .spots-container a,
-.spots-container a:hover,
 .spots-container a:active,
 .spots-container a:focus {
     color: inherit;
@@ -104,6 +102,6 @@ body {
     transition: color 0.2s ease;
 }
 
-.nav-link:hover {
+/* .nav-link:hover {
     color: #ff385c;
-}
+} */

@@ -12,6 +12,7 @@ import PostReview from "./components/PostReview/PostReview";
 import ManageSpots from "./components/ManageSpots/ManageSpots";
 import DeleteForm from "./components/DeleteForm/DeleteForm";
 import UpdateForm from "./components/UpdateForm/UpdateForm";
+import DeleteReview from "./components/DeleteReview/DeleteReview";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/reviews/:reviewId/delete">
+            <DeleteReview />
           </Route>
           <Route path="/spots/:spotId/reviews">
             <PostReview />
