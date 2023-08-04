@@ -110,7 +110,8 @@ const UpdateForm = () => {
                         </div>
                         <input
                             type="string"
-                            value={spot && (country ? country : setCountry(spot.country))}
+                            // value={spot && (country ? country : setCountry(spot.country))}
+                            value={country}
                             onChange={updateCountry} />
                     </div>
                     <div>
@@ -123,7 +124,8 @@ const UpdateForm = () => {
                         </div>
                         <input
                             type="string"
-                            value={spot && (address ? address : setAddress(spot.address))}
+                            value={address}
+                            // value={spot && (address ? address : setAddress(spot.address))}
                             onChange={updateAddress} />
                     </div>
                     <div className='sidebyside'>
@@ -137,7 +139,8 @@ const UpdateForm = () => {
                             </div>
                             <input
                                 type="string"
-                                value={spot && (city ? city : setCity(spot.city))}
+                                value={city}
+                                // value={spot && (city ? city : setCity(spot.city))}
                                 onChange={updateCity} />
                         </div>
                         <div>
@@ -150,7 +153,8 @@ const UpdateForm = () => {
                             </div>
                             <input
                                 type="string"
-                                value={spot && (state ? state : setState(spot.state))}
+                                value={state}
+                                // value={spot && (state ? state : setState(spot.state))}
                                 onChange={updateState} />
                         </div>
                     </div>
@@ -160,7 +164,8 @@ const UpdateForm = () => {
                                 type="number"
                                 min="-90"
                                 max="90"
-                                value={spot && (lat ? lat : setLat(spot.lat))}
+                                value={lat}
+                                // value={spot && (lat ? lat : setLat(spot.lat))}
                                 onChange={updateLat} />
                         </div>
                         <div>
@@ -168,7 +173,8 @@ const UpdateForm = () => {
                                 type="number"
                                 min="-180"
                                 max="180"
-                                value={spot && (lng ? lng : setLng(spot.lng))}
+                                value={lng}
+                                // value={spot && (lng ? lng : setLng(spot.lng))}
                                 onChange={updateLng} />
                         </div>
                     </div>
@@ -179,7 +185,8 @@ const UpdateForm = () => {
                     <div>
                         <textarea
                             type="string"
-                            value={spot && (description ? description : setDescription(spot.description))}
+                            value={description}
+                            // value={spot && (description ? description : setDescription(spot.description))}
                             onChange={updateDescription} />
                         <div className="error">
                             {hasSubmitted && validationErrors.description &&
@@ -194,7 +201,8 @@ const UpdateForm = () => {
                     <div>
                         <input
                             type="string"
-                            value={spot && (name ? name : setName(spot.name))}
+                            value={name}
+                            // value={spot && (name ? name : setName(spot.name))}
                             onChange={updateName} />
                         <div className="error">
                             {hasSubmitted && validationErrors.name &&
@@ -210,7 +218,8 @@ const UpdateForm = () => {
                         <input
                             type="number"
                             min="0"
-                            value={spot && (price ? price : setPrice(spot.price))}
+                            value={price}
+                            // value={spot && (price ? price : setPrice(spot.price))}
                             onChange={updatePrice} />
                         <div className="error">
                             {hasSubmitted && validationErrors.price &&

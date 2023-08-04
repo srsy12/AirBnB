@@ -17,22 +17,31 @@
 }
 
 
-#signupformcontainer #button-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: red;
-    width: 94%;
+.loginbutton {
+    width: 100%;
     height: 80%;
     border: none;
     border-radius: 8px;
-    padding: 10px;
     font-size: 15px;
     margin-top: 10px;
 }
 
-#signupformcontainer #button-container button {
-    color: white;
+.loginbutton .workingbutton1 {
     width: 100%;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 15px;
+    color: white;
+    background-color: red;
+}
+
+.loginbutton .disabledbutton1 {
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 15px;
+    width: 100%;
+    background-color: grey;
+    color: black
 }
