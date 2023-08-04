@@ -107,7 +107,15 @@ const SpotDetails = () => {
                             </div>
                         )}
                         {!reviews && user && user?.id !== spot.Owner?.id && (
-                            <div>Be the first to post a review!</div>
+                            <div>
+                                <div>Be the first to post a review!</div>
+                                {!found && user && user?.id !== spot.Owner?.id && (
+                                    <OpenModalButton
+                                        buttonName="Post Review"
+                                        modalComponent={<PostReview />}
+                                    />
+                                )}
+                            </div>
                         )}
                     </div>
                 </div>
