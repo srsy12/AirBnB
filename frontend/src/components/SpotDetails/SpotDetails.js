@@ -49,7 +49,7 @@ const SpotDetails = () => {
                                 <div id='spot-pricing'>${spot.price}/night</div>
                                 <div id='ratingreviews'>
                                     {spot.avgRating !== "0.00" ? spot.avgRating : 'NEW'}<i className="fa-solid fa-star"></i>
-                                    {spot.numReviews !== 1 ? (
+                                    {/* {spot.numReviews !== 1 ? (
                                         <div>
                                             {spot.numReviews > 1 ? (
                                                 <div> · {spot.numReviews} reviews</div>
@@ -60,6 +60,11 @@ const SpotDetails = () => {
                                         </div>
                                     ) : (
                                         <div> · {spot.numReviews} review</div>
+                                    )} */}
+                                    {spot.numReviews === 1 ? (
+                                        <div>· {spot.numReviews} review</div>
+                                    ) : (
+                                        <div> · {spot.numReviews} reviews</div>
                                     )}
                                 </div>
                             </div>
@@ -70,7 +75,7 @@ const SpotDetails = () => {
                         <div className="spot-rating">
                             <h4>{spot.avgRating !== "0.00" ? spot.avgRating : 'NEW'}</h4>
                             <i className="fa-solid fa-star"></i>
-                            {spot.numReviews !== 1 ? (
+                            {/* {spot.numReviews !== 1 ? (
                                 <div>
                                     {spot.numReviews > 1 ? (
                                         <div> · {spot.numReviews} reviews</div>
@@ -81,6 +86,11 @@ const SpotDetails = () => {
                                 </div>
                             ) : (
                                 <div> · {spot.numReviews} review</div>
+                            )} */}
+                            {spot.numReviews === 1 ? (
+                                <div>· {spot.numReviews} review</div>
+                            ) : (
+                                <div> · {spot.numReviews} reviews</div>
                             )}
                         </div>
                         {reviews && reviews.length > 0 && (
