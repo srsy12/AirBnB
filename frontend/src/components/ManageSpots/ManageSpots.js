@@ -24,17 +24,17 @@ const ManageSpots = () => {
         return (
             <div>
                 <h1>You do not have any spots currently. Would you like to create one?</h1>
-                <button onClick={() => history.push(`/spots`)}>Create A New Spot</button>
+                <button className="manageupdate" onClick={() => history.push(`/spots`)}>Create A New Spot</button>
             </div>
         )
     } else {
         return (
             <div className="spots-container">
                 <h1 className="spots-title">Manage Spots</h1>
-                <button onClick={() => history.push(`/spots`)}>Create A New Spot</button>
+                <button className="manageupdate" onClick={() => history.push(`/spots`)}>Create A New Spot</button>
                 <div className="spots-grid">
                     {spotsObject?.map(([key, spot]) => (
-                        <div key={key} className="spot-item">
+                        <div key={key} className="spot-item1">
                             <NavLink to={`/spots/${spot.id}`} title={spot.name}>
                                 <div>
                                     <img src={spot.previewImage} className="spot-image" alt="Spot Preview" />
@@ -48,11 +48,13 @@ const ManageSpots = () => {
                                     <div className="spot-price">${spot.price}/night</div>
                                 </div>
                             </NavLink>
-                            <OpenModalButton
-                                buttonName="Delete"
-                                modalComponent={<DeleteForm spotId={spot.id} />}
-                            />
-                            <button onClick={() => history.push(`/spots/${spot.id}/update`)}>Update</button>
+                            <div className='managebuttons'>
+                                <button className="manageupdate" onClick={() => history.push(`/spots/${spot.id}/update`)}>Update</button>
+                                <OpenModalButton
+                                    buttonName="Delete"
+                                    modalComponent={<DeleteForm spotId={spot.id} />}
+                                />
+                            </div>
                         </div>
                     ))}
                 </div>

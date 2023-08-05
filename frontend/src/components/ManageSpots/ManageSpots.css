@@ -30,11 +30,11 @@ body {
 }
 
 /* Individual spot item */
-.spot-item {
+.spot-item1 {
     background-color: #f9f9f9;
     border-radius: 5px;
-    padding: 15px;
     transition: transform 0.3s ease;
+    /* border: 1px solid black; */
 }
 
 /* .spot-item:hover {
@@ -105,3 +105,19 @@ body {
 /* .nav-link:hover {
     color: #ff385c;
 } */
+
+.managebuttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.manageupdate {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+    color: white;
+    padding: 5px;
+    font-size: 15px;
+}

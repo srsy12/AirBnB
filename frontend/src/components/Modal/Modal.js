@@ -14,7 +14,7 @@ const OpenModalButton = ({ buttonName, modalComponent }) => {
     return (
         <context.Provider value={{ setModal }}>
             <div className='button-container' onClick={() => { if (modal === false) setModal(true) }}>
-                <button onClick={toggleModal}>
+                <button className="modalbutton" onClick={toggleModal}>
                     {buttonName}
                 </button>
                 {modal && (

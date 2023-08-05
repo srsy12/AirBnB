@@ -31,3 +31,13 @@
     border: none;
 }
 
+.modalbutton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: white;
+    padding: 5px;
+    font-size: 15px;
+}

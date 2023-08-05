@@ -42,9 +42,9 @@ function SignupFormPage() {
     };
     let button;
     if (username.length < 4 || password.length < 6 || !email || !firstName || !lastName || !confirmPassword) {
-        button = <button type="submit" disabled>Sign Up</button>
+        button = <button type="submit" disabled='true' className='disabledbutton1'>Sign Up</button>
     } else {
-        button = <button type="submit">Sign Up</button>
+        button = <button type="submit" className='workingbutton1'>Sign Up</button>
     }
 
     return (
@@ -99,7 +99,7 @@ function SignupFormPage() {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                 />
-                <div id="button-container">{button}</div>
+                <div className="loginbutton">{button}</div>
             </form>
         </div>
     );
